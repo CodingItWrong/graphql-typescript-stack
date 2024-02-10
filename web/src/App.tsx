@@ -1,7 +1,8 @@
-import {useGetUsersQuery} from './generated/graphql';
+import { useQuery } from '@apollo/client';
+import { GetUsersDocument } from './generated/graphql';
 
 function App() {
-  const {loading, error, data} = useGetUsersQuery();
+  const { loading, error, data } = useQuery(GetUsersDocument);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
