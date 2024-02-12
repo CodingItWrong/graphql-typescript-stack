@@ -10,4 +10,4 @@ See [graphql-typescript-stack README](../README.md) for overview.
 
 ## Running
 
-`yarn start`
+`yarn dev`
