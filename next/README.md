@@ -2,6 +2,8 @@
 
 See [graphql-typescript-stack README](../README.md) for overview.
 
+The GraphQL query is made on the server side using Suspense, Server Components, and Next's streaming functionality. The query can be seen in [page.tsx](./app/page.tsx).
+
 ## Installation
 
 - `yarn install`

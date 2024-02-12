@@ -2,6 +2,8 @@
 
 See [graphql-typescript-stack README](../README.md) for overview.
 
+The GraphQL query is made on the client side using Suspense and Apollo Client's `useSuspenseQuery` hook. The query can be seen in [App.tsx](./src/App.tsx).
+
 ## Installation
 
 - `yarn install`
