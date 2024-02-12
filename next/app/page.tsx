@@ -1,5 +1,6 @@
 import { Suspense } from "react";
-import { UserList } from "./UserList";
+import client from "./apolloClient";
+import { GetUsersDocument } from "./generated/graphql";
 
 export default function Home() {
   /*
@@ -15,5 +16,18 @@ export default function Home() {
         <UserList />
       </Suspense>
     </div>
+  );
+}
+
+export async function UserList() {
+  // see https://blog.logrocket.com/why-use-next-js-apollo/
+  const {data} = await client.query({query: GetUsersDocument});
+
+  return (
+      <ul>
+        {data.users.map(user => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
   );
 }
