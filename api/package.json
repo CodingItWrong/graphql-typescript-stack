@@ -8,9 +8,13 @@
     "start": "PORT=4000 nodemon src/index.ts",
     "db:migrate": "ts-node src/db/migrate.ts",
     "db:seed": "ts-node src/db/seed.ts",
-    "db:setup": "yarn db:migrate && yarn db:seed"
+    "db:setup": "yarn db:migrate && yarn db:seed",
+    "generate": "graphql-codegen"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/typescript": "^4.0.4",
+    "@graphql-codegen/typescript-resolvers": "^4.0.4",
     "@types/node": "^20.11.17",
     "@types/pg": "^8.11.0",
     "drizzle-kit": "^0.20.14",
