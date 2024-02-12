@@ -1,22 +1,29 @@
-import { useQuery } from '@apollo/client';
+import { useSuspenseQuery } from '@apollo/client';
 import { GetUsersDocument } from './generated/graphql';
+import { Suspense } from 'react';
 
 function App() {
-  const { loading, error, data } = useQuery(GetUsersDocument);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
-  if (!data) return <p>Data is undefined??</p>;
-
   return (
     <div className="App">
       <h1>Users</h1>
-      <ul>
-        {data.users.map(user => (
-          <li key={user.id}>{user.name}</li>
-        ))}
-      </ul>
+      <Suspense fallback={<p>Loading…</p>}>
+        <UserList />
+      </Suspense>
     </div>
+  );
+}
+
+function UserList() {
+  const { error, data } = useSuspenseQuery(GetUsersDocument);
+
+  if (error) return <p>Error :(</p>;
+
+  return (
+    <ul>
+      {data.users.map(user => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
   );
 }
 
