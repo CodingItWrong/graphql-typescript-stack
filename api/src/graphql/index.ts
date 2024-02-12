@@ -1,12 +1,19 @@
 import { readFileSync } from 'fs';
 import { ApolloServer } from 'apollo-server-express';
 import { db } from '../db';
+import { Resolvers } from './generated/resolvers-types';
 
 const typeDefs = readFileSync('./src/graphql/schema.graphql', { encoding: 'utf-8' });
 
-const resolvers = {
+const resolvers: Resolvers = {
   Query: {
-    users: () => db.query.user.findMany()
+    users: async () => {
+      const result = await db.query.user.findMany();
+      return result.map(user => ({
+        id: String(user.id),
+        email: user.email
+      }));
+    }
   }
 };
 
