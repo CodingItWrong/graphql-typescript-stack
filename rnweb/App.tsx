@@ -1,7 +1,7 @@
 import { ApolloClient, ApolloProvider, InMemoryCache, useSuspenseQuery } from '@apollo/client';
 import { StatusBar } from 'expo-status-bar';
 import { Suspense } from 'react';
-import { FlatList, Platform, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Platform, Text, View } from 'react-native';
 import { GetUsersDocument } from './src/generated/graphql';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
@@ -41,24 +41,15 @@ function UserScreen() {
 function UserList() {
   const { error, data } = useSuspenseQuery(GetUsersDocument);
 
-  if (error) return <p>Error :(</p>;
+  if (error) return <Text>Error :(</Text>;
 
   return (
     <FlatList
       data={data.users}
       keyExtractor={user => user.id}
       renderItem={({ item: user }) => (
-        <View style={{ width: 100, height: 100 }}><Text>{user.name}</Text></View>
+        <Text>{user.name}</Text>
       )}
     />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
