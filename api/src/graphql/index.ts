@@ -11,6 +11,7 @@ const resolvers: Resolvers = {
       const result = await db.query.user.findMany();
       return result.map(user => ({
         id: String(user.id),
+        name: user.name,
         email: user.email
       }));
     }
