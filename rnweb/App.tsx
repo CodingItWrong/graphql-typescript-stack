@@ -1,8 +1,9 @@
 import { ApolloClient, ApolloProvider, InMemoryCache, useSuspenseQuery } from '@apollo/client';
 import { StatusBar } from 'expo-status-bar';
 import { Suspense } from 'react';
-import { FlatList, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Platform, StyleSheet, Text, View } from 'react-native';
 import { GetUsersDocument } from './src/generated/graphql';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 const graphqlDomain = Platform.select({
   android: '10.0.2.2',
@@ -17,20 +18,24 @@ const client = new ApolloClient({
 export default function App() {
   return (
     <ApolloProvider client={client}>
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaProvider>
+        <StatusBar />
         <UserScreen />
-      </SafeAreaView>
+
+      </SafeAreaProvider>
     </ApolloProvider>
   );
 }
 
 function UserScreen() {
-  return <View style={{ flex: 1 }}>
-    <Text>Users</Text>
-    <Suspense fallback={<Text>Loading…</Text>}>
-      <UserList />
-    </Suspense>
-  </View>
+  return <SafeAreaView style={{ flex: 1 }}>
+    <View style={{ flex: 1 }}>
+      <Text>Users</Text>
+      <Suspense fallback={<Text>Loading…</Text>}>
+        <UserList />
+      </Suspense>
+    </View>
+  </SafeAreaView>
 }
 
 function UserList() {
