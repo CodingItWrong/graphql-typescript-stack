@@ -1,12 +1,46 @@
+import { ApolloClient, ApolloProvider, InMemoryCache, useSuspenseQuery } from '@apollo/client';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Suspense } from 'react';
+import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { GetUsersDocument } from './src/generated/graphql';
+
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/graphql',
+  cache: new InMemoryCache()
+});
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ApolloProvider client={client}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <UserScreen />
+      </SafeAreaView>
+    </ApolloProvider>
+  );
+}
+
+function UserScreen() {
+  return <View style={{ flex: 1 }}>
+    <Text>Users</Text>
+    <Suspense fallback={<Text>Loading…</Text>}>
+      <UserList />
+    </Suspense>
+  </View>
+}
+
+function UserList() {
+  const { error, data } = useSuspenseQuery(GetUsersDocument);
+
+  if (error) return <p>Error :(</p>;
+
+  return (
+    <FlatList
+      data={data.users}
+      keyExtractor={user => user.id}
+      renderItem={({ item: user }) => (
+        <View style={{ width: 100, height: 100 }}><Text>{user.name}</Text></View>
+      )}
+    />
   );
 }
 
