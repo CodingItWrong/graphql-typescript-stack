@@ -1,11 +1,16 @@
 import { ApolloClient, ApolloProvider, InMemoryCache, useSuspenseQuery } from '@apollo/client';
 import { StatusBar } from 'expo-status-bar';
 import { Suspense } from 'react';
-import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { GetUsersDocument } from './src/generated/graphql';
 
+const graphqlDomain = Platform.select({
+  android: '10.0.2.2',
+  default: 'localhost'
+})
+
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
+  uri: `http://${graphqlDomain}:4000/graphql`,
   cache: new InMemoryCache()
 });
 
