@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io' show Platform;
+import 'queries.graphql.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,16 +52,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-String getUsers = """
-query GetUsers {
-  users {
-    id
-    name
-    email
-  }
-}
-""";
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -112,15 +103,8 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Query(
-        options: QueryOptions(
-          document: gql(getUsers),
-        ),
-        builder: (
-          QueryResult result, {
-          VoidCallback? refetch,
-          FetchMore? fetchMore,
-        }) {
+      body: Query$GetUsers$Widget(
+        builder: (result, {refetch, fetchMore}) {
           if (result.hasException) {
             return Text(result.exception.toString());
           }
@@ -128,12 +112,12 @@ class _MyHomePageState extends State<MyHomePage> {
             return const Text('Loading!!1!');
           }
 
-          List users = result.data?['users'];
+          var users = result.parsedData?.users;
 
           return ListView.builder(
-            itemCount: users.length,
+            itemCount: users?.length,
             itemBuilder: (context, index) {
-              return Text(users[index]['name']);
+              return Text("Type-safe ${users![index].name}");
             },
           );
         },
