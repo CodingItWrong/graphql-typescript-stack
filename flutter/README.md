@@ -7,7 +7,7 @@ The same client runs on iOS, Android, and web. The GraphQL query is made on the 
 ## Installation
 
 - Copy `../api/src/graphql/schema.graphql` and overwrite `./lib/schema.graphql` with it
-- Run `dart run build_runner build` to regenerate the code in `lib/__generated`
+- Run `rm -fr lib/__generated && dart run build_runner build` to regenerate the code in `lib/__generated`
 
 ## Running
 
