@@ -1,16 +1,10 @@
-# graphql_codegen_flutter
+# graphql-typescript-stack/flutter
 
-A new Flutter project.
+See [graphql-typescript-stack README](../README.md) for overview.
 
-## Getting Started
+The same client runs on iOS, Android, and web. The GraphQL query is made on the client side using the `graphql_flutter` package. The query can be seen in [App.tsx](./lib/main.dart).
 
-This project is a starting point for a Flutter application.
+## Running
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Start the [API](../api/README.md) server locally (defaults to port 4000)
+- From within VS Code, run `lib/main.dart` on your device of choice
