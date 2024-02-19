@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io' show Platform;
-import 'queries.graphql.dart';
+import '__generated/queries.graphql.dart';
 
 void main() {
   runApp(const MyApp());

@@ -3,6 +3,7 @@ targets:
     builders:
       graphql_codegen:
         options:
+          outputDirectory: __generated
           clients:
             - graphql
             - graphql_flutter
