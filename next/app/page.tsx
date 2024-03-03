@@ -19,7 +19,7 @@ export default function Home() {
   );
 }
 
-export async function UserList() {
+async function UserList() {
   // see https://blog.logrocket.com/why-use-next-js-apollo/
   const {data} = await client.query({query: GetUsersDocument});
 
