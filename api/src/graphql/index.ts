@@ -26,6 +26,16 @@ const resolvers: Resolvers = {
         createdAt: message.createdAt.toISOString(), // TODO: ideal format?
       }));
     }
+  },
+  Mutation: {
+    sendMessage: async (_, {content}) => {
+      const newMessage = (await db.insert(message).values({content}).returning())[0];
+      return {
+        id: String(newMessage.id),
+        content: newMessage.content,
+        createdAt: newMessage.createdAt.toISOString(),
+      };
+    }
   }
 };
 

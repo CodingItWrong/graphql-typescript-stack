@@ -14,3 +14,9 @@ type Query {
   users: [User!]!
   messages: [Message!]!
 }
+
+type Mutation {
+  sendMessage(
+    content: String!
+  ): Message
+}
