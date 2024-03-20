@@ -36,7 +36,12 @@ const resolvers: Resolvers = {
         createdAt: newMessage.createdAt.toISOString(),
       };
     }
-  }
+  },
+  Subscription: {
+    messageSent: {
+      subscribe: () => {},
+    },
+  },
 };
 
 const schema = makeExecutableSchema({typeDefs, resolvers});
