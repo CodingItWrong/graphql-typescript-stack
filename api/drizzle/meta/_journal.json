@@ -15,6 +15,13 @@
       "when": 1708003618011,
       "tag": "0001_overjoyed_omega_flight",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1710957048573,
+      "tag": "0002_odd_firestar",
+      "breakpoints": true
     }
   ]
 }
