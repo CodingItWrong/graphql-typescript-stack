@@ -1,5 +1,4 @@
 import { readFileSync } from 'fs';
-import { ApolloServer } from '@apollo/server';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { db } from '../db';
 import { Resolvers } from './generated/resolvers-types';
@@ -42,9 +41,4 @@ const resolvers: Resolvers = {
 
 const schema = makeExecutableSchema({typeDefs, resolvers});
 
-const server = new ApolloServer({
-  schema,
-  csrfPrevention: true
-});
-
-export default server;
+export default schema;
