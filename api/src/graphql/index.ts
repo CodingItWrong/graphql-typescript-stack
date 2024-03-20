@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs';
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer } from '@apollo/server';
 import { db } from '../db';
 import { Resolvers } from './generated/resolvers-types';
 import { message } from '../db/schema';
